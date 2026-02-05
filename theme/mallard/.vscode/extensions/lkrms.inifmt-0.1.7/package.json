@@ -1,0 +1,66 @@
+{
+	"name": "inifmt",
+	"displayName": "inifmt - formatter for .ini files, plain text and more",
+	"description": "Trim and squeeze spaces and empty lines",
+	"version": "0.1.7",
+	"publisher": "lkrms",
+	"engines": {
+		"vscode": "^1.74.0"
+	},
+	"categories": [
+		"Formatters"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/lkrms/vscode-inifmt.git"
+	},
+	"activationEvents": [
+		"onLanguage:ini",
+		"onLanguage:dotenv",
+		"onLanguage:hosts",
+		"onLanguage:ignore",
+		"onLanguage:plaintext",
+		"onLanguage:properties",
+		"onLanguage:ssh_config"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "inifmt.format",
+				"title": "Trim and squeeze spaces and empty lines"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run update-changelog && npm run compile",
+		"update-changelog": "scripts/update-changelog.sh",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"lint": "ts-standard"
+	},
+	"devDependencies": {
+		"@types/node": "^18.x",
+		"@types/vscode": "^1.74.0",
+		"@vscode/vsce": "^2.21.0",
+		"ovsx": "^0.8.3",
+		"ts-standard": "^12.0.2",
+		"typescript": "^4.9.5"
+	},
+	"icon": "images/inifmt.png",
+	"__metadata": {
+		"id": "0f1eeb9a-eee5-476f-af6d-d27ed0a58e8e",
+		"publisherId": "d6dc577b-95d4-4a86-aa9e-67878382838d",
+		"publisherDisplayName": "Luke Arms",
+		"targetPlatform": "undefined",
+		"isApplicationScoped": false,
+		"isPreReleaseVersion": false,
+		"hasPreReleaseVersion": false,
+		"installedTimestamp": 1733849074961,
+		"pinned": false,
+		"preRelease": false,
+		"source": "gallery",
+		"size": 18474
+	}
+}

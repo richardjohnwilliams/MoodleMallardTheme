@@ -1,0 +1,1560 @@
+/* =========================
+   Mallard: global tokens
+   Keep at top so var() is available everywhere
+   ========================= */
+:root {
+  --mallard-blue: #005AD2;
+  --mallard-cyan: #00B9E1;
+
+  /* Banner sizing */
+  --mallard-banner-top: 110px;
+  --mallard-banner-cyan: 190px;
+  --mallard-banner-total: calc(var(--mallard-banner-top) + var(--mallard-banner-cyan));
+
+  /* Card sizing */
+  --mallard-card-max: 1232px;
+  --mallard-card-radius: 12px;
+
+  /* Shared content inset (Figma) */
+  --mallard-content-x: 48px;
+  --mallard-content-x-sm: 16px;
+
+  /* Tabs */
+  --mallard-tab-h: 48px;
+  --mallard-tab-gap: 24px;
+  --mallard-tab-underline: 3px;
+
+  /* Divider */
+  --mallard-divider: 1px solid rgba(0, 0, 0, 0.12);
+
+  /* Static sidebar (Figma) */
+  --mallard-sidebar-width: 298px;
+  --mallard-sidebar-gap: 48px;
+
+  /* Quick Links (Activities block) */
+  --mallard-ql-pink: #BE185D;   /* Assignments */
+  --mallard-ql-blue: #1D4ED8;   /* Discussions (Forums) */
+  --mallard-ql-orange: #C2410C; /* Anything else */
+
+  --mallard-ql-pink-bg: rgba(190, 24, 93, 0.12);
+  --mallard-ql-blue-bg: rgba(29, 78, 216, 0.12);
+  --mallard-ql-orange-bg: rgba(194, 65, 12, 0.12);
+
+  /* Figma-ish sizing */
+  --mallard-ql-icon-size: 16.67px;
+  --mallard-ql-icon-pad: 6px;     /* chip size: ~28.67px total */
+  --mallard-ql-icon-radius: 6px;
+
+  /* Icon tint filters (works best when underlying icon is monochrome) */
+  --mallard-ql-filter-pink: brightness(0) saturate(100%) invert(18%) sepia(79%) saturate(5096%) hue-rotate(317deg) brightness(91%) contrast(98%);
+  --mallard-ql-filter-blue: brightness(0) saturate(100%) invert(22%) sepia(92%) saturate(6066%) hue-rotate(221deg) brightness(92%) contrast(103%);
+  --mallard-ql-filter-orange: brightness(0) saturate(100%) invert(34%) sepia(88%) saturate(2708%) hue-rotate(6deg) brightness(96%) contrast(98%);
+}
+
+/* =========================
+   Mallard shell: applies site-wide where required
+   (standard/admin/report/coursecategory/course/incourse)
+   ========================= */
+
+/* Page background */
+body.pagelayout-standard,
+body.pagelayout-admin,
+body.pagelayout-report,
+body.pagelayout-coursecategory,
+body.pagelayout-course,
+body.pagelayout-incourse,
+body.pagelayout-report,
+body.pagelayout-admin {
+  background: #F8F9FA;
+}
+
+/* Banner parent */
+body.pagelayout-standard #page,
+body.pagelayout-admin #page,
+body.pagelayout-report #page,
+body.pagelayout-coursecategory #page,
+body.pagelayout-course #page,
+body.pagelayout-incourse #page {
+  position: relative;
+  background: transparent;
+}
+
+/* Two-strip banner behind the top of the page */
+body.pagelayout-standard #page::before,
+body.pagelayout-admin #page::before,
+body.pagelayout-report #page::before,
+body.pagelayout-coursecategory #page::before,
+body.pagelayout-course #page::before,
+body.pagelayout-incourse #page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--mallard-banner-total);
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    var(--mallard-blue) 0,
+    var(--mallard-blue) var(--mallard-banner-top),
+    var(--mallard-cyan) var(--mallard-banner-top),
+    var(--mallard-cyan) var(--mallard-banner-total)
+  );
+}
+
+/* Ensure core areas sit above the banner */
+body.pagelayout-standard #page-header,
+body.pagelayout-standard .secondary-navigation,
+body.pagelayout-standard #page-content,
+body.pagelayout-admin #page-header,
+body.pagelayout-admin .secondary-navigation,
+body.pagelayout-admin #page-content,
+body.pagelayout-report #page-header,
+body.pagelayout-report .secondary-navigation,
+body.pagelayout-report #page-content,
+body.pagelayout-coursecategory #page-header,
+body.pagelayout-coursecategory .secondary-navigation,
+body.pagelayout-coursecategory #page-content,
+body.pagelayout-course #page-header,
+body.pagelayout-course .secondary-navigation,
+body.pagelayout-course #page-content,
+body.pagelayout-incourse #page-header,
+body.pagelayout-incourse .secondary-navigation,
+body.pagelayout-incourse #page-content {
+  position: relative;
+}
+
+/* Let us control widths consistently */
+body.pagelayout-standard #page.drawers .main-inner,
+body.pagelayout-admin #page.drawers .main-inner,
+body.pagelayout-report #page.drawers .main-inner,
+body.pagelayout-coursecategory #page.drawers .main-inner,
+body.pagelayout-course #page.drawers .main-inner,
+body.pagelayout-incourse #page.drawers .main-inner,
+body.pagelayout-standard.limitedwidth #page.drawers .main-inner,
+body.pagelayout-admin.limitedwidth #page.drawers .main-inner,
+body.pagelayout-report.limitedwidth #page.drawers .main-inner,
+body.pagelayout-coursecategory.limitedwidth #page.drawers .main-inner,
+body.pagelayout-course.limitedwidth #page.drawers .main-inner,
+body.pagelayout-incourse.limitedwidth #page.drawers .main-inner {
+  max-width: none !important;
+  width: 100%;
+  margin: 30px auto 32px auto;
+  padding: 0;
+  background: transparent !important;
+  gap: 0;
+}
+
+/* White stack container look */
+body.pagelayout-standard #page-header,
+body.pagelayout-standard .secondary-navigation,
+body.pagelayout-standard #page-content,
+body.pagelayout-admin #page-header,
+body.pagelayout-admin .secondary-navigation,
+body.pagelayout-admin #page-content,
+body.pagelayout-report #page-header,
+body.pagelayout-report .secondary-navigation,
+body.pagelayout-report #page-content,
+body.pagelayout-coursecategory #page-header,
+body.pagelayout-coursecategory .secondary-navigation,
+body.pagelayout-coursecategory #page-content,
+body.pagelayout-course #page-header,
+body.pagelayout-course .secondary-navigation,
+body.pagelayout-course #page-content,
+body.pagelayout-incourse #page-header,
+body.pagelayout-incourse .secondary-navigation,
+body.pagelayout-incourse #page-content {
+  max-width: var(--mallard-card-max);
+  margin-left: auto;
+  margin-right: auto;
+  background: #ffffff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Rounded corners:
+   - page-content is fully rounded by default (pages without header)
+   - if a header exists, only the bottom corners remain on page-content
+*/
+body.pagelayout-standard #page-content,
+body.pagelayout-admin #page-content,
+body.pagelayout-report #page-content,
+body.pagelayout-coursecategory #page-content,
+body.pagelayout-course #page-content,
+body.pagelayout-incourse #page-content {
+  border-radius: var(--mallard-card-radius);
+}
+
+body.pagelayout-standard #page-header,
+body.pagelayout-admin #page-header,
+body.pagelayout-report #page-header,
+body.pagelayout-coursecategory #page-header,
+body.pagelayout-course #page-header,
+body.pagelayout-incourse #page-header {
+  border-radius: var(--mallard-card-radius) var(--mallard-card-radius) 0 0;
+}
+
+body.pagelayout-standard #page-header + #page-content,
+body.pagelayout-admin #page-header + #page-content,
+body.pagelayout-report #page-header + #page-content,
+body.pagelayout-coursecategory #page-header + #page-content,
+body.pagelayout-course #page-header + #page-content,
+body.pagelayout-incourse #page-header + #page-content {
+  border-radius: 0 0 var(--mallard-card-radius) var(--mallard-card-radius);
+}
+
+/* Responsive margins */
+@media (min-width: 768px) and (max-width: 1279px) {
+  body.pagelayout-standard #page-header,
+  body.pagelayout-standard .secondary-navigation,
+  body.pagelayout-standard #page-content,
+  body.pagelayout-admin #page-header,
+  body.pagelayout-admin .secondary-navigation,
+  body.pagelayout-admin #page-content,
+  body.pagelayout-report #page-header,
+  body.pagelayout-report .secondary-navigation,
+  body.pagelayout-report #page-content,
+  body.pagelayout-coursecategory #page-header,
+  body.pagelayout-coursecategory .secondary-navigation,
+  body.pagelayout-coursecategory #page-content,
+  body.pagelayout-course #page-header,
+  body.pagelayout-course .secondary-navigation,
+  body.pagelayout-course #page-content,
+  body.pagelayout-incourse #page-header,
+  body.pagelayout-incourse .secondary-navigation,
+  body.pagelayout-incourse #page-content {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  body.pagelayout-standard #page-header,
+  body.pagelayout-standard .secondary-navigation,
+  body.pagelayout-standard #page-content,
+  body.pagelayout-admin #page-header,
+  body.pagelayout-admin .secondary-navigation,
+  body.pagelayout-admin #page-content,
+  body.pagelayout-report #page-header,
+  body.pagelayout-report .secondary-navigation,
+  body.pagelayout-report #page-content,
+  body.pagelayout-coursecategory #page-header,
+  body.pagelayout-coursecategory .secondary-navigation,
+  body.pagelayout-coursecategory #page-content,
+  body.pagelayout-course #page-header,
+  body.pagelayout-course .secondary-navigation,
+  body.pagelayout-course #page-content,
+  body.pagelayout-incourse #page-header,
+  body.pagelayout-incourse .secondary-navigation,
+  body.pagelayout-incourse #page-content {
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+}
+/* =========================
+   Mallard: course banner + nav above heading (Flexbox reorder)
+   Targets: /course/view.php (body.path-course-view)
+   ========================= */
+
+/* Outer page background */
+body.path-course-view {
+  background: #F8F9FA;
+}
+
+/* Two-strip banner behind the top of the page */
+body.path-course-view #page {
+  position: relative;
+  background: transparent;
+}
+
+body.path-course-view #page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--mallard-banner-total);
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    var(--mallard-blue) 0,
+    var(--mallard-blue) var(--mallard-banner-top),
+    var(--mallard-cyan) var(--mallard-banner-top),
+    var(--mallard-cyan) var(--mallard-banner-total)
+  );
+}
+
+/* Flexbox visual reordering
+   TARGET: #topofscroll.main-inner
+*/
+body.path-course-view #topofscroll.main-inner {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Override Boost's max-width constraint on the container */
+body.path-course-view #page.drawers .main-inner,
+body.path-course-view.limitedwidth #page.drawers .main-inner,
+body.pagelayout-course #page.drawers .main-inner {
+  max-width: none !important;
+  width: 100%;
+  margin: 30px auto 32px auto;
+  padding: 0;
+  background: transparent !important;
+  gap: 0;
+}
+
+/* Default order for all children */
+body.path-course-view #topofscroll.main-inner > * {
+  order: 100;
+}
+
+/* Drawer toggles: keep at top */
+body.path-course-view #topofscroll.main-inner > .drawer-toggles {
+  order: 0;
+}
+
+/* Tabs row */
+body.path-course-view #topofscroll.main-inner > .secondary-navigation {
+  order: 1;
+}
+
+/* Page header (title) */
+body.path-course-view #topofscroll.main-inner > #page-header {
+  order: 2;
+}
+
+/* Above content blocks */
+body.path-course-view #topofscroll.main-inner > #abovecontent-region {
+  order: 3;
+}
+
+/* Main content */
+body.path-course-view #topofscroll.main-inner > #page-content {
+  order: 4;
+}
+
+/* Ensure content sits above the banner pseudo-element */
+body.path-course-view #page-header,
+body.path-course-view .secondary-navigation,
+body.path-course-view #page-content {
+  position: relative;
+}
+
+/* Centre the white card stack */
+body.path-course-view #page-header,
+body.path-course-view .secondary-navigation,
+body.path-course-view #page-content {
+  max-width: var(--mallard-card-max);
+  margin-left: auto;
+  margin-right: auto;
+  background: #ffffff;
+}
+
+/* Course homepage: widen the white stack to accommodate the static sidebar (desktop) */
+@media (min-width: 992px) {
+  body#page-course-view-topics.path-course-view #page-header,
+  body#page-course-view-topics.path-course-view .secondary-navigation,
+  body#page-course-view-topics.path-course-view #page-content,
+  body#page-course-view-weeks.path-course-view #page-header,
+  body#page-course-view-weeks.path-course-view .secondary-navigation,
+  body#page-course-view-weeks.path-course-view #page-content {
+    max-width: calc(var(--mallard-card-max) + var(--mallard-sidebar-width) + var(--mallard-sidebar-gap));
+  }
+}
+
+/* Medium screens: 16px margin */
+@media (min-width: 768px) and (max-width: 1279px) {
+  body.path-course-view #page-header,
+  body.path-course-view .secondary-navigation,
+  body.path-course-view #page-content {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+}
+
+/* Small screens: 8px margin */
+@media (max-width: 767px) {
+  body.path-course-view #page-header,
+  body.path-course-view .secondary-navigation,
+  body.path-course-view #page-content {
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+
+  body.path-course-view .secondary-navigation .nav-tabs {
+    gap: 12px;
+  }
+
+  body.path-course-view .secondary-navigation .nav-tabs .nav-link {
+    font-size: 14px;
+    padding: 0 8px;
+  }
+}
+
+/* Secondary navigation (tabs) styling */
+body.path-course-view .secondary-navigation {
+  margin-top: 0;
+  border: 0 !important;
+  box-shadow: none !important;
+
+  padding-top: 16px;
+  padding-left: var(--mallard-content-x);
+  padding-right: var(--mallard-content-x);
+  padding-bottom: 0;
+
+  border-radius: var(--mallard-card-radius) var(--mallard-card-radius) 0 0;
+  overflow: visible;
+  background: #ffffff !important;
+}
+
+/* Kill any stray horizontal rules inside the secondary nav */
+body.path-course-view .secondary-navigation hr {
+  display: none !important;
+}
+
+/* Remove shadows/borders from wrappers */
+body.path-course-view .secondary-navigation .moremenu,
+body.path-course-view .secondary-navigation .moremenu-navigation,
+body.path-course-view .secondary-navigation .nav,
+body.path-course-view .secondary-navigation .nav-tabs {
+  box-shadow: none !important;
+}
+
+/* Remove the extra grey line under the nav (comes from .navigation) */
+body.path-course-view .secondary-navigation .navigation {
+  border-bottom: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: #fff !important;
+}
+
+/* Tabs bar: single bottom divider */
+body.path-course-view .secondary-navigation .nav-tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--mallard-tab-gap);
+
+  margin: 0 !important;
+  padding-left: 0 !important;
+
+  width: 100%;
+  justify-content: flex-start !important;
+
+  border-bottom: var(--mallard-divider) !important;
+}
+
+/* Prevent hidden offsets from Moodle/Boost */
+body.path-course-view .secondary-navigation .moremenu,
+body.path-course-view .secondary-navigation .moremenu-navigation,
+body.path-course-view .secondary-navigation .navigation {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  justify-content: flex-start !important;
+}
+
+body.path-course-view .secondary-navigation .nav-tabs .nav-item {
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+/* Individual tab links */
+body.path-course-view .secondary-navigation .nav-tabs .nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: var(--mallard-tab-h);
+  padding: 0 12px;
+
+  width: clamp(110px, 12vw, 150px);
+
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.2;
+
+  color: var(--mallard-blue);
+  background: transparent;
+
+  border: 0;
+  border-bottom: var(--mallard-tab-underline) solid transparent;
+  border-radius: 0;
+  box-shadow: none;
+  white-space: nowrap;
+}
+
+body.path-course-view .secondary-navigation .nav-tabs .nav-link:hover {
+  color: var(--mallard-blue);
+  border-bottom-color: rgba(0, 185, 225, 0.55);
+  background: transparent;
+}
+
+body.path-course-view .secondary-navigation .nav-tabs .nav-link:focus {
+  outline: 2px solid rgba(0, 90, 210, 0.35);
+  outline-offset: 2px;
+}
+
+body.path-course-view .secondary-navigation .nav-tabs .nav-link.active,
+body.path-course-view .secondary-navigation .nav-tabs .nav-item.show .nav-link {
+  color: var(--mallard-blue);
+  background: transparent;
+  border-bottom-color: var(--mallard-cyan);
+}
+
+/* Dropdown behaviour (More menu) */
+body.path-course-view .secondary-navigation .dropdown-menu {
+  z-index: 2000;
+}
+
+/* Small screens: allow horizontal scroll instead of crushing */
+@media (max-width: 767px) {
+  body.path-course-view .secondary-navigation {
+    padding-left: var(--mallard-content-x-sm);
+    padding-right: var(--mallard-content-x-sm);
+  }
+
+  body.path-course-view .secondary-navigation .nav-tabs {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  body.path-course-view .secondary-navigation .nav-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  body.path-course-view .secondary-navigation .nav-tabs .nav-link {
+    width: auto;
+    min-width: 120px;
+  }
+}
+
+/* Page header (title area) */
+body.path-course-view #page-header,
+body.path-course-view header#page-header.header-maxwidth,
+body.path-course-view #topofscroll #page-header,
+body.path-course-view.pagelayout-course #page-header {
+  margin-top: 0;
+
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+
+  padding-top: 60px !important;
+  padding-bottom: 60px !important;
+
+  padding-left: var(--mallard-content-x) !important;
+  padding-right: var(--mallard-content-x) !important;
+
+  border-radius: 0;
+  overflow: visible;
+  min-height: 0;
+  background: #ffffff !important;
+}
+
+/* Small screens: reduce header padding + align inset */
+@media (max-width: 767px) {
+  body.path-course-view #page-header,
+  body.path-course-view header#page-header.header-maxwidth,
+  body.path-course-view #topofscroll #page-header,
+  body.path-course-view.pagelayout-course #page-header {
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+    padding-left: var(--mallard-content-x-sm) !important;
+    padding-right: var(--mallard-content-x-sm) !important;
+  }
+}
+
+body.path-course-view #page-header h1,
+body.path-course-view #page-header .h2 {
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 120%;
+  color: #212529;
+}
+
+/* Remove inner wrapper backgrounds and margins */
+body.path-course-view #page-header .w-100,
+body.path-course-view #page-header .d-flex,
+body.path-course-view #page-header .page-context-header {
+  background: transparent;
+}
+
+body.path-course-view #page-header .page-context-header {
+  margin-bottom: 0 !important;
+}
+
+/* Breadcrumb spacing if present */
+body.path-course-view #page-header #page-navbar,
+body.path-course-view #page-header .breadcrumb {
+  margin: 0;
+  padding: 0;
+}
+
+/* Main content (bottom of card) */
+body.path-course-view #page-content {
+  padding-top: 0 !important; /* remove top gap */
+  padding-bottom: 32px;
+  padding-left: var(--mallard-content-x) !important;
+  padding-right: var(--mallard-content-x) !important;
+
+  border-radius: 0 0 var(--mallard-card-radius) var(--mallard-card-radius);
+  background: #ffffff !important;
+}
+
+/* Mobile inset for main content */
+@media (max-width: 767px) {
+  body.path-course-view #page-content {
+    padding-left: var(--mallard-content-x-sm) !important;
+    padding-right: var(--mallard-content-x-sm) !important;
+  }
+}
+
+/* Keep inner wrappers from adding their own left offset */
+body.path-course-view #page-content #region-main,
+body.path-course-view #page-content .region-main-content,
+body.path-course-view #page-content .course-content {
+  background: transparent;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Stop region-main adding its own box */
+body.path-course-view #region-main {
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+}
+
+/* Remove Boost 15px padding inside role="main" on course view */
+body.path-course-view #page.drawers div[role="main"] {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Clean up stray elements */
+body.path-course-view .drawer-toggles {
+  background: transparent;
+  max-width: none;
+}
+
+body.path-course-view #page-header,
+body.path-course-view .secondary-navigation,
+body.path-course-view #page-content {
+  margin-bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Latest announcements banner (abovecontent) */
+body.path-course-view #block-region-abovecontent section.block_news_items.block {
+  max-width: 100%;
+  margin: 0 0 1rem 0;
+
+  border: 0;
+  border-radius: 8px;
+  box-shadow: none;
+  background: transparent;
+}
+
+body.path-course-view #block-region-abovecontent section.block_news_items.block > .card-body > h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  line-height: 0;
+  display: flex;
+  align-items: center;
+}
+
+body.path-course-view #block-region-abovecontent section.block_news_items.block > .card-body > h3::before {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-image: url([[pix:theme_mallard|letter-i]]);
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+body.path-course-view #block-region-abovecontent section.block_news_items.block .card-body {
+  background: #E9F3FF;
+  border-radius: 8px;
+  padding: 12px 16px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+/* Title link styling */
+body.path-course-view #block-region-abovecontent section.block_news_items.block .card-text .info a {
+  display: inline-block;
+  font-weight: 600;
+  text-decoration: none;
+  color: inherit;
+  line-height: 1.2;
+}
+
+/* Hide unwanted lines inside the item */
+body.path-course-view #block-region-abovecontent section.block_news_items.block .newlink,
+body.path-course-view #block-region-abovecontent section.block_news_items.block .footer,
+body.path-course-view #block-region-abovecontent section.block_news_items.block .head,
+body.path-course-view #block-region-abovecontent section.block_news_items.block .date,
+body.path-course-view #block-region-abovecontent section.block_news_items.block .name,
+body.path-course-view #block-region-abovecontent section.block_news_items.block .clearer {
+  display: none;
+}
+
+/* Keep list clean */
+body.path-course-view #block-region-abovecontent section.block_news_items.block ul {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+body.path-course-view #block-region-abovecontent section.block_news_items.block li {
+  margin: 0;
+}
+
+/* Hide block controls unless editing */
+body.path-course-view:not(.editing):not(.editingon) #block-region-abovecontent section.block_news_items.block .block-controls {
+  display: none;
+}
+
+/* Remove spacing that pushes the title down */
+body.path-course-view #block-region-abovecontent section.block_news_items.block .card-text.content.mt-3 {
+  margin-top: 0 !important;
+}
+
+body.path-course-view #block-region-abovecontent section.block_news_items.block .card-text,
+body.path-course-view #block-region-abovecontent section.block_news_items.block .card-text ul.unlist,
+body.path-course-view #block-region-abovecontent section.block_news_items.block .card-text li.post,
+body.path-course-view #block-region-abovecontent section.block_news_items.block .card-text .info {
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================
+   Sections as cards (course homepage only)
+   Applies to /course/view.php
+   Does NOT apply to /course/section.php
+   ========================= */
+
+/* Shared card grid + base card styles */
+@mixin mallard-section-card-grid($listSelector) {
+  #{$listSelector} {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    display: grid;
+    gap: 24px;
+    justify-content: start;
+
+    /* Mobile default */
+    grid-template-columns: 1fr;
+
+    /* Tablet */
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    /* Desktop: match Figma (3 across) */
+    @media (min-width: 1200px) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+}
+
+@mixin mallard-section-card-base($itemSelector) {
+  #{$itemSelector} {
+    margin: 0;
+    background: #ffffff;
+
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: var(--mallard-card-radius);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+
+    /* Avoid clipping header content */
+    overflow: visible;
+
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  #{$itemSelector} .section-item {
+    border: 0 !important;
+    border-radius: 0 !important;
+
+    padding: 16px;
+    background: transparent;
+
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-width: 0;
+  }
+
+  /* Header: keep title and any right-side controls inside the card */
+  #{$itemSelector} .course-section-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 0;
+    margin: 0 0 10px 0;
+
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+  }
+
+  #{$itemSelector} .course-section-header .sectionname,
+  #{$itemSelector} .course-section-header .section-title {
+    margin: 0;
+    min-width: 0;
+  }
+
+  #{$itemSelector} .course-section-header .sectionname a,
+  #{$itemSelector} .course-section-header .section-title a {
+    display: inline-block;
+    color: #212529;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.25;
+    text-decoration: none;
+    min-width: 0;
+  }
+
+  #{$itemSelector} .course-section-header .sectionname a:hover,
+  #{$itemSelector} .course-section-header .section-title a:hover {
+    text-decoration: underline;
+  }
+
+  /* Ensure the header’s last element cannot shrink or clip */
+  #{$itemSelector} .course-section-header > :last-child {
+    flex: 0 0 auto;
+    align-self: flex-start;
+  }
+
+  /* Content wrapper: keep neutral, JS will hide activity list */
+  #{$itemSelector} .content {
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+  }
+}
+
+/* Topics course homepage (cards enabled) */
+body#page-course-view-topics.path-course-view.format-topics:not(.editing):not(.editingon) {
+  @include mallard-section-card-grid(".course-content ul.topics");
+  @include mallard-section-card-base(".course-content ul.topics > li.section.course-section");
+
+  /* Ensure course section content is visible so summary/meta can render */
+  .course-content ul.topics > li.section.course-section
+    .content.course-content-item-content.collapse {
+    display: block !important;
+  }
+
+  /* Card header image container */
+  .course-content ul.topics > li.section.course-section .mallard-section-card-media {
+    height: 140px;
+    margin: -16px -16px 12px -16px;
+    border-radius: var(--mallard-card-radius) var(--mallard-card-radius) 0 0;
+    overflow: hidden;
+    background: #f1f3f5;
+  }
+
+  .course-content ul.topics > li.section.course-section .mallard-section-card-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Figma-style counts row (inserted by JS) */
+  .mallard-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+
+    margin: 6px 0 10px 0;
+    font-size: 13px;
+    color: rgba(33, 37, 41, 0.75);
+  }
+
+  .mallard-card-meta .mallard-meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+
+  .mallard-card-meta .mallard-meta-item i {
+    opacity: 0.8;
+  }
+
+  /* Summary text alignment */
+  .course-content ul.topics > li.section.course-section {
+    .content.course-content-item-content {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    [data-for="sectioninfo"],
+    .section-summary-activities,
+    .summary {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    .summarytext {
+      margin-top: 8px !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      margin-bottom: 0 !important;
+
+      padding: 0 !important;
+
+      font-family: "Open Sans", sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.5;
+      letter-spacing: 0;
+      color: #1D2125;
+      text-align: left;
+    }
+
+    .summarytext .no-overflow,
+    .summarytext p {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    [data-for="sectioninfo"] {
+      margin: 0 !important;
+    }
+  }
+
+  /* Hide activity lists only once JS has run */
+  .course-content ul.topics > li.section.course-section.mallard-hide-activities {
+    ul.section[data-for="cmlist"] {
+      display: none !important;
+    }
+
+    .section-summary-activities {
+      display: none !important;
+    }
+
+    .content ul.section,
+    .content .section {
+      display: none !important;
+    }
+  }
+
+  /* Footer row (mins left, recently viewed right) */
+  .course-content ul.topics > li.section.course-section {
+    .mallard-card-footer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: auto;
+    }
+
+    .mallard-duration-tag {
+      display: inline-flex !important;
+      align-items: center;
+
+      width: auto !important;
+      max-width: 60px !important;
+
+      padding: 4px 8px;
+      border-radius: 999px;
+
+      background: #F1F3F5;
+      color: #6B7280;
+
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.2;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: clip;
+
+      margin: 0 !important;
+    }
+
+    .mallard-recent-badge {
+      display: none;
+    }
+
+    &.mallard-recent .mallard-recent-badge {
+      display: inline-block;
+      margin-left: auto;
+
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.2;
+      color: #6B7280;
+
+      white-space: nowrap;
+    }
+
+    &.mallard-recent {
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    }
+  }
+}
+
+/* Weeks course homepage (optional) */
+body#page-course-view-weeks.path-course-view.format-weeks:not(.editing):not(.editingon) {
+  @include mallard-section-card-grid(".course-content ul.weeks");
+  @include mallard-section-card-base(".course-content ul.weeks > li.section.course-section");
+}
+
+/* Course view: remove collapse and expand controls */
+.course-content .section-controls,
+.course-content .collapse-all,
+.course-content .expand-all,
+.course-content #collapsesections,
+.course-content a.section-collapsemenu,
+.course-content .section-collapsemenu,
+.course-content .section-collapsemenu .collapseall,
+.course-content .section-collapsemenu .expandall {
+  display: none !important;
+}
+
+.course-content .collapsed-icon,
+.course-content .collapsed-icon .fa-chevron-right,
+.course-content .collapsed-icon .fa-chevron-left,
+body.path-course-view .course-content a.icons-collapse-expand,
+body.path-course-view .course-content .section-toggle {
+  display: none !important;
+}
+
+.course-content .section.collapsed .content {
+  display: block !important;
+}
+
+.course-content .section.collapsed {
+  height: auto !important;
+}
+
+/* Cards: footer alignment + summary spacing */
+body#page-course-view-topics.path-course-view.format-topics:not(.editing):not(.editingon)
+  .course-content ul.topics > li.section.course-section {
+  .summarytext {
+    margin-bottom: 12px !important;
+  }
+
+  .mallard-card-footer {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 10px !important;
+    padding-bottom: 0 !important;
+  }
+
+  .mallard-duration-tag {
+    margin-left: 0 !important;
+  }
+}
+
+/* Tutor link styling */
+.mallard-course-tutor .mallard-tutor-name,
+.mallard-course-tutor .mallard-tutor-name:visited {
+  color: var(--mallard-blue, #005AD2);
+  text-decoration: none;
+}
+
+.mallard-course-tutor .mallard-tutor-name:hover,
+.mallard-course-tutor .mallard-tutor-name:focus {
+  text-decoration: underline;
+}
+
+/* =========================
+   Mallard: course view static right sidebar (Figma)
+   Targets: /course/view.php (body.path-course-view)
+   ========================= */
+body.path-course-view {
+  .mallard-course-layout {
+    display: block;
+  }
+
+  .mallard-course-sidebar {
+    margin-top: 24px;
+  }
+
+  @media (min-width: 992px) {
+    .mallard-course-layout {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--mallard-sidebar-gap);
+      width: 100%;
+    }
+
+    .mallard-course-main {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .mallard-course-sidebar {
+      flex: 0 0 var(--mallard-sidebar-width);
+      margin-top: 0;
+    }
+
+    .mallard-course-sidebar-inner {
+      background: #ffffff;
+      border: 0;
+      border-radius: var(--mallard-card-radius, 12px);
+
+      padding-top: 32px;
+      padding-right: 16px;
+      padding-bottom: 32px;
+      padding-left: 16px;
+
+      position: sticky;
+      top: 16px;
+    }
+  }
+}
+
+/* Sidebar progress widget (Figma) */
+body.path-course-view {
+  .mallard-course-sidebar-inner {
+    border: 0 !important;
+  }
+
+  .mallard-sidebar-progress {
+    margin-bottom: 16px;
+  }
+
+  .mallard-sidebar-progress-bar {
+    height: 6px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .mallard-sidebar-progress-fill {
+    height: 100%;
+    background: var(--mallard-blue, #005AD2);
+    border-radius: 999px;
+    width: 0%;
+  }
+
+  .mallard-sidebar-progress-text {
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(33, 37, 41, 0.75);
+  }
+}
+
+/* Quick Links styling for Activities block (Figma) */
+body.path-course-view .mallard-course-sidebar-inner #block-region-side-pre {
+  section.block_activity_modules.block {
+    margin-bottom: 24px;
+
+    /* Remove nested block "card" look in view mode (sidebar itself is the card) */
+    @at-root body.path-course-view:not(.editing):not(.editingon) & {
+      .card,
+      .card-body {
+        background: transparent !important;
+        border: 0 !important;
+        box-shadow: none !important;
+      }
+
+      /* Hide the Activities title bar so only your "Quick Links" heading remains */
+      .card-header {
+        display: none !important;
+      }
+
+      .card-body {
+        padding: 0 !important;
+      }
+    }
+
+    /* Editing: keep header/actions visible, but tidy spacing */
+    @at-root body.path-course-view.editing &,
+    @at-root body.path-course-view.editingon & {
+      .card-body {
+        padding: 12px 16px !important;
+      }
+    }
+
+    /* List reset */
+    .content ul,
+    .content ul.unlist,
+    .content .unlist {
+      list-style: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    /* Rows */
+    .content li {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    /* Link layout */
+    .content li a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      padding: 8px 0;
+      margin: 0;
+
+      text-decoration: none !important;
+      color: #1D2125 !important;
+
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 1.25;
+    }
+
+    .content li a:hover,
+    .content li a:focus {
+      color: #1D2125 !important;
+      text-decoration: none !important;
+    }
+
+    /* Ensure Moodle icons are visible */
+    .content img.icon {
+      display: inline-block !important;
+      visibility: visible !important;
+
+      width: var(--mallard-ql-icon-size) !important;
+      height: var(--mallard-ql-icon-size) !important;
+
+      padding: var(--mallard-ql-icon-pad) !important;
+      border-radius: var(--mallard-ql-icon-radius) !important;
+      box-sizing: content-box !important;
+
+      margin: 0 !important;
+      flex: 0 0 auto;
+      vertical-align: middle;
+
+      /* Default: anything else (orange) */
+      background: var(--mallard-ql-orange-bg) !important;
+      filter: var(--mallard-ql-filter-orange) !important;
+    }
+
+    /* Forums (discussions) */
+    .content a[href*="/mod/forum/"] img.icon {
+      background: var(--mallard-ql-blue-bg) !important;
+      filter: var(--mallard-ql-filter-blue) !important;
+    }
+
+    /* Assignments */
+    .content a[href*="/mod/assign/"] img.icon {
+      background: var(--mallard-ql-pink-bg) !important;
+      filter: var(--mallard-ql-filter-pink) !important;
+    }
+
+    /* Defensive: remove odd wrapper spacing if present */
+    .content .activityiconcontainer,
+    .content .iconcontainer {
+      margin: 0 !important;
+      padding: 0 !important;
+      background: transparent !important;
+      border: 0 !important;
+    }
+  }
+}
+
+/* Remove sidebar block borders (Figma) */
+body.path-course-view:not(.editing):not(.editingon) {
+  .mallard-course-sidebar-inner #block-region-side-pre {
+    /* Activities (block_activity_modules) */
+    section.block_activity_modules.block {
+      .card {
+        border: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+      }
+
+      .card-header {
+        border-bottom: 0 !important;
+        background: transparent !important;
+      }
+    }
+
+    /* Upcoming events (block_calendar_upcoming) */
+    section.block_calendar_upcoming.block {
+      .card {
+        border: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+      }
+
+      .card-header {
+        border-bottom: 0 !important;
+        background: transparent !important;
+      }
+    }
+  }
+}
+
+/* Remove borders on sidebar block sections (they are .card) */
+body.path-course-view .mallard-course-sidebar-inner #block-region-side-pre {
+  /* Activities block */
+  section.block_activity_modules.block.card,
+  section.block_activity_modules.block.list_block.card {
+    border: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+  }
+
+  /* Upcoming events block */
+  section.block_calendar_upcoming.block.card,
+  section.block_calendar_upcoming.block.list_block.card {
+    border: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+  }
+
+  /* Remove the header divider line that comes with card styling */
+  section.block_activity_modules.block.card > .card-header,
+  section.block_calendar_upcoming.block.card > .card-header {
+    border-bottom: 0 !important;
+    background: transparent !important;
+  }
+
+  /* Make sure inner body stays clean */
+  section.block_activity_modules.block.card > .card-body,
+  section.block_calendar_upcoming.block.card > .card-body {
+    background: transparent !important;
+  }
+}
+
+body.path-course-view .mallard-course-abovecontent {
+  margin-bottom: 24px;
+}
+/* =========================
+   Mallard: in-course header stack (tabs above title)
+   Applies to all course + incourse pages (sections + activities + forums + lessons)
+   ========================= */
+
+body.pagelayout-course,
+body.pagelayout-incourse,
+body.pagelayout-report,
+body.pagelayout-admin {
+  /* Flex stack so we can order tabs above the title everywhere */
+  #topofscroll.main-inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Default order */
+  #topofscroll.main-inner > * {
+    order: 100;
+  }
+
+  /* Keep toggles first */
+  #topofscroll.main-inner > .drawer-toggles {
+    order: 0;
+  }
+
+  /* Tabs row */
+  #topofscroll.main-inner > .secondary-navigation {
+    order: 1;
+  }
+
+  /* Title */
+  #topofscroll.main-inner > #page-header {
+    order: 2;
+  }
+
+  /* Above content blocks */
+  #topofscroll.main-inner > #abovecontent-region {
+    order: 3;
+  }
+
+  /* Main content */
+  #topofscroll.main-inner > #page-content {
+    order: 4;
+  }
+
+  /* Ensure these sit above the banner pseudo-element */
+  #page-header,
+  .secondary-navigation,
+  #page-content {
+    position: relative;
+  }
+
+  /* Tabs styling (same as course home) */
+  .secondary-navigation {
+    margin-top: 0;
+    border: 0 !important;
+    box-shadow: none !important;
+
+    padding-top: 16px;
+    padding-left: var(--mallard-content-x);
+    padding-right: var(--mallard-content-x);
+    padding-bottom: 0;
+
+    border-radius: var(--mallard-card-radius) var(--mallard-card-radius) 0 0;
+    overflow: visible;
+    background: #ffffff !important;
+  }
+
+  .secondary-navigation hr {
+    display: none !important;
+  }
+
+  .secondary-navigation .moremenu,
+  .secondary-navigation .moremenu-navigation,
+  .secondary-navigation .nav,
+  .secondary-navigation .nav-tabs {
+    box-shadow: none !important;
+  }
+
+  .secondary-navigation .navigation {
+    border-bottom: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: #fff !important;
+  }
+
+  .secondary-navigation .nav-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--mallard-tab-gap);
+
+    margin: 0 !important;
+    padding-left: 0 !important;
+
+    width: 100%;
+    justify-content: flex-start !important;
+
+    border-bottom: var(--mallard-divider) !important;
+  }
+
+  .secondary-navigation .moremenu,
+  .secondary-navigation .moremenu-navigation,
+  .secondary-navigation .navigation {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    justify-content: flex-start !important;
+  }
+
+  .secondary-navigation .nav-tabs .nav-item {
+    margin: 0;
+    flex: 0 0 auto;
+  }
+
+  .secondary-navigation .nav-tabs .nav-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    height: var(--mallard-tab-h);
+    padding: 0 12px;
+
+    width: clamp(110px, 12vw, 150px);
+
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.2;
+
+    color: var(--mallard-blue);
+    background: transparent;
+
+    border: 0;
+    border-bottom: var(--mallard-tab-underline) solid transparent;
+    border-radius: 0;
+    box-shadow: none;
+    white-space: nowrap;
+  }
+
+  .secondary-navigation .nav-tabs .nav-link:hover {
+    color: var(--mallard-blue);
+    border-bottom-color: rgba(0, 185, 225, 0.55);
+    background: transparent;
+  }
+
+  .secondary-navigation .nav-tabs .nav-link:focus {
+    outline: 2px solid rgba(0, 90, 210, 0.35);
+    outline-offset: 2px;
+  }
+
+  .secondary-navigation .nav-tabs .nav-link.active,
+  .secondary-navigation .nav-tabs .nav-item.show .nav-link {
+    color: var(--mallard-blue);
+    background: transparent;
+    border-bottom-color: var(--mallard-cyan);
+  }
+
+  /* Match header/content rounding with tabs present */
+  #page-header {
+    border-radius: 0 !important;
+  }
+
+  #page-content {
+    border-radius: 0 0 var(--mallard-card-radius) var(--mallard-card-radius) !important;
+  }
+
+  /* Mobile inset */
+  @media (max-width: 767px) {
+    .secondary-navigation {
+      padding-left: var(--mallard-content-x-sm);
+      padding-right: var(--mallard-content-x-sm);
+    }
+
+    .secondary-navigation .nav-tabs {
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .secondary-navigation .nav-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .secondary-navigation .nav-tabs .nav-link {
+      width: auto;
+      min-width: 120px;
+    }
+  }
+}
+
+/* Only show the announcement banner on the course home page(s) */
+body:not(#page-course-view-topics):not(#page-course-view-weeks) #block-region-abovecontent section.block_news_items.block {
+  display: none !important;
+}
+
+/* Hide breadcrumbs row, keep the main navbar */
+#page-navbar,
+nav.breadcrumb-nav,
+.breadcrumb-nav {
+  display: none !important;
+}
+
+body.path-course-view #topofscroll.main-inner,
+body.pagelayout-course #topofscroll.main-inner,
+body.pagelayout-incourse #topofscroll.main-inner {
+  display: flex;
+  flex-direction: column;
+}

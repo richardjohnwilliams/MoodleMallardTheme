@@ -1,0 +1,195 @@
+{
+	"name": "open-php-html-js-in-browser",
+	"displayName": "Open PHP/HTML/JS In Browser",
+	"description": "A GUI to open PHP/HTML/JS files in browser on http://localhost or file:/// scheme. Suitable for XAMPP.",
+	"icon": "resources/logo-128x128.png",
+	"version": "2.5.0",
+	"publisher": "PrimaFuture",
+	"author": {
+		"name": "PrimaFuture.cz s.r.o.",
+		"email": "vsc@primafuture.cz"
+	},
+	"engines": {
+		"vscode": "^1.28.0"
+	},
+	"repository": {
+		"type": "http",
+		"url": "https://www.primafuture.cz"
+	},
+	"keywords": [
+		"vscode",
+		"vsc",
+		"extension",
+		"open",
+		"browsers",
+		"localhost",
+		"file",
+		"launch"
+	],
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"main": "./out/extension",
+	"contributes": {
+		"commands": [
+			{
+				"command": "open-php-html-js-in-browser.openInBrowser",
+				"title": "Open PHP/HTML/JS in browser"
+			}
+		],
+		"menus": {
+			"commandPalette": [
+				{
+					"command": "open-php-html-js-in-browser.openInBrowser"
+				}
+			],
+			"editor/context": [
+				{
+					"command": "open-php-html-js-in-browser.openInBrowser",
+					"group": "navigation"
+				}
+			],
+			"editor/title/context": [
+				{
+					"command": "open-php-html-js-in-browser.openInBrowser",
+					"group": "navigation"
+				}
+			]
+		},
+		"keybindings": [
+			{
+				"command": "open-php-html-js-in-browser.openInBrowser",
+				"key": "shift+f6",
+				"when": "editorTextFocus"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Open PHP/HTML/JS in browser",
+			"properties": {
+				"open-php-html-js-in-browser.rememberBrowserSelection": {
+					"order": 1,
+					"type": "boolean",
+					"default": true,
+					"markdownDescription": "Remember last browser selection. Uncheck and select `Ask always...` option if you want to always choose browser to launch",
+					"scope": "window"
+				},
+				"open-php-html-js-in-browser.selectedBrowser": {
+					"order": 2,
+					"type": [
+						"string"
+					],
+					"default": "",
+					"markdownDescription": "Browser to open (`Chrome`, `Firefox`, ...)",
+					"enum": [
+						"Ask always...",
+						"Chrome",
+						"Chromium",
+						"Firefox",
+						"Safari",
+						"Opera",
+						"Edge",
+						"Internet Explorer",
+						"Custom..."
+					],
+					"scope": "window"
+				},
+				"open-php-html-js-in-browser.customBrowserPath": {
+					"order": 3,
+					"type": "string",
+					"default": "",
+					"markdownDescription": "Path of a custom browser executable (eg. `C:\\Program Files\\Browser\\Browser.exe`)",
+					"scope": "window"
+				},
+				"open-php-html-js-in-browser.documentRootFolder": {
+					"order": 4,
+					"type": "string",
+					"default": "",
+					"markdownDescription": "Base directory of your pages to serve from `http://localhost` domain (eg. `C:\\xampp\\htdocs\\`, `/var/www/`, `etc.`). Autodetect by default",
+					"scope": "window"
+				},
+				"open-php-html-js-in-browser.alternativeDocumentRootFolders": {
+					"order": 5,
+					"type": "array",
+					"markdownDescription": "Alternative base directories of your pages to serve from `http://localhost` domain",
+					"scope": "window",
+					"items": {
+						"type": "string"
+					}
+				},
+				"open-php-html-js-in-browser.urlToOpen": {
+					"order": 6,
+					"type": "string",
+					"default": "",
+					"markdownDescription": "Url scheme to open in browser (http://localhost or file:/// or custom)",
+					"enum": [
+						"http://localhost/",
+						"file:///",
+						"custom"
+					],
+					"scope": "window"
+				},
+				"open-php-html-js-in-browser.customHost": {
+					"order": 7,
+					"type": "string",
+					"default": "",
+					"markdownDescription": "Custom localhost hostname with port number (eg. `localhost:8888`, `localhost:1234`)",
+					"scope": "window"
+				},
+				"open-php-html-js-in-browser.customUrlToOpen": {
+					"order": 8,
+					"type": "string",
+					"default": "http://${host}/${relativeDirnameDocumentRoot}/${fileBasename}",
+					"markdownDescription": "Custom url to open in browser (eg. `http://${host}/${relativeDirnameDocumentRoot}/${fileBasename}`)",
+					"scope": "window"
+				},
+				"open-php-html-js-in-browser.showStatusBarItem": {
+					"order": 9,
+					"type": "boolean",
+					"default": true,
+					"markdownDescription": "Show the button `Open In Browser` in the vscode status bar",
+					"scope": "window"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+	},
+	"dependencies": {
+		"@types/lodash": "^4.14.119",
+		"@types/node": "^8.10.25",
+		"child_process": "^1.0.2",
+		"is-subdir": "^1.0.2",
+		"is-wsl": "^1.1.0",
+		"lodash": "^4.17.11",
+		"path": "^0.12.7"
+	},
+	"devDependencies": {
+		"@types/mocha": "^2.2.42",
+		"tslint": "^5.8.0",
+		"typescript": "^3.1.4",
+		"vscode": "^1.1.25"
+	},
+	"__metadata": {
+		"id": "c1ac69da-f18e-4bcd-a1d0-678a0b3e5e4b",
+		"publisherId": "12e6226d-66cc-4852-9e1b-0d1d1489de87",
+		"publisherDisplayName": "PrimaFuture",
+		"targetPlatform": "undefined",
+		"isApplicationScoped": false,
+		"isPreReleaseVersion": false,
+		"hasPreReleaseVersion": false,
+		"installedTimestamp": 1733849077358,
+		"pinned": false,
+		"preRelease": false,
+		"source": "gallery",
+		"size": 1540185
+	}
+}

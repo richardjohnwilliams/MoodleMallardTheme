@@ -1,0 +1,122 @@
+{
+	"name": "vscode-smarty",
+	"publisher": "ssigwart",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ssigwart/vscode-smarty"
+	},
+	"displayName": "Smarty Language Server",
+	"description": "Smarty language support",
+	"version": "1.0.19",
+	"engines": {
+		"vscode": "^1.56.0"
+	},
+	"categories": [
+		"Programming Languages",
+		"Language Packs",
+		"Formatters",
+		"Linters"
+	],
+	"keywords": [
+		"Smarty"
+	],
+	"activationEvents": [
+		"onLanguage:smarty",
+		"onLanguage:php"
+	],
+	"main": "./client/out/extension",
+	"contributes": {
+		"languages": [
+			{
+				"id": "smarty",
+				"aliases": [
+					"Smarty",
+					"smarty"
+				],
+				"extensions": [
+					".tpl"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "smarty",
+				"scopeName": "text.html.smarty",
+				"path": "./syntaxes/smarty.tmLanguage.json"
+			}
+		],
+		"commands": [
+			{
+				"command": "smarty.copyTplPath",
+				"title": "Copy Smarty TPL path",
+				"enablement": "editorLangId == smarty"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Smarty",
+			"properties": {
+				"smarty.maxNumberOfDiagnosticMsgs": {
+					"scope": "resource",
+					"type": "number",
+					"default": 1000,
+					"description": "Controls the maximum number of diagnostic messages (E.g. XSS warnings) to generate."
+				},
+				"smarty.disableHtmlAttributeCompletionQuotes": {
+					"scope": "resource",
+					"type": "boolean",
+					"default": false,
+					"markdownDescription": "When completing an HTML attribute such as `class=\"...\"`, should quotes be stripped? If you like this option, please add a +1 react and comment on https://github.com/microsoft/vscode/issues/131144 to request that it be added to the standard HTML language in VS Code."
+				},
+				"smarty.pluginDirs": {
+					"scope": "window",
+					"type": "array",
+					"default": [],
+					"description": "List of directories that include Smarty plugins. By default, the “plugins” directory in the workspace root is included."
+				},
+				"smarty.xssExemptRegularExpressions": {
+					"scope": "window",
+					"type": "array",
+					"default": [],
+					"description": "List of regular expressions for Smarty variables that will disable XSS warning."
+				},
+				"smarty.xssExemptModifiers": {
+					"scope": "window",
+					"type": "array",
+					"default": [],
+					"description": "List of Smarty plugins that will disable XSS warning."
+				},
+				"smarty.customModifiers": {
+					"scope": "window",
+					"type": "array",
+					"default": [],
+					"description": "List of custom Smarty modifiers to show in completions. This is useful for plugins not defined in the plugins directory."
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "rm -rf server/out client/out && npm run compile",
+		"compile": "npm run copy-lib && tsc -b",
+		"watch": "npm run copy-lib && tsc -b -w",
+		"copy-lib": "mkdir -p server/out/lib/ && cp -r server/lib/ server/out/lib/",
+		"postinstall": "cd client && npm install && cd ../server && npm install && cd .."
+	},
+	"dependencies": {
+		"typescript": "^5.7.0"
+	},
+	"devDependencies": {
+		"@types/mocha": "^8.2.2",
+		"@types/node": "^16.0.0",
+		"@typescript-eslint/eslint-plugin": "^4.23.0",
+		"@typescript-eslint/parser": "^4.23.0",
+		"eslint": "^7.26.0",
+		"mocha": "^8.3.2"
+	},
+	"__metadata": {
+		"installedTimestamp": 1761917377534,
+		"targetPlatform": "undefined",
+		"size": 35050691
+	}
+}

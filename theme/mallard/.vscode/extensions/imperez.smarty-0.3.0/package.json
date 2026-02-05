@@ -1,0 +1,73 @@
+{
+	"name": "smarty",
+	"displayName": "Smarty",
+	"description": "Syntax highlighting for the Smarty templating language.",
+	"version": "0.3.0",
+	"icon": "images/logo.png",
+	"publisher": "imperez",
+	"engines": {
+		"vscode": "^0.10.x"
+	},
+	"categories": [
+		"Languages",
+		"Snippets"
+	],
+	"keywords": [
+		"smarty",
+		"php",
+		"syntax",
+		"snippets"
+	],
+	"bugs": {
+		"url": "https://github.com/jens1o/vscode-smarty/issues"
+	},
+	"homepage": "https://github.com/jens1o/vscode-smarty/blob/master/README.md",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jens1o/vscode-smarty.git"
+	},
+	"contributes": {
+		"languages": [
+			{
+				"id": "smarty",
+				"aliases": [
+					"Smarty",
+					"smarty"
+				],
+				"extensions": [
+					".tpl",
+					".smarty",
+					".html.smarty"
+				],
+				"configuration": "./smarty.configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "smarty",
+				"scopeName": "text.html.smarty",
+				"path": "./syntaxes/smarty.tmLanguage"
+			}
+		],
+		"snippets": [
+			{
+				"language": "smarty",
+				"path": "./snippets/snippets.json"
+			}
+		]
+	},
+	"__metadata": {
+		"id": "dfc91f03-d4f2-461b-a26d-b8b4dc02474f",
+		"publisherId": "c638ec24-b0fd-4f47-bef6-410bd58e39ea",
+		"publisherDisplayName": "imperez",
+		"targetPlatform": "undefined",
+		"isApplicationScoped": false,
+		"isPreReleaseVersion": false,
+		"hasPreReleaseVersion": false,
+		"installedTimestamp": 1733849074687,
+		"pinned": false,
+		"preRelease": false,
+		"source": "gallery",
+		"size": 22683
+	}
+}

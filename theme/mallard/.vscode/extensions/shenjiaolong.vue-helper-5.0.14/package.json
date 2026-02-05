@@ -1,0 +1,224 @@
+{
+	"name": "vue-helper",
+	"displayName": "vue-helper",
+	"version": "5.0.14",
+	"description": "vue enhance, extension for Element-UI, Element Plus, Ant Desigin Vue",
+	"keywords": [
+		"vue-helper",
+		"element-ui",
+		"Element Plus",
+		"Ant",
+		"Ant Desigin Vue",
+		"vue",
+		"vscode"
+	],
+	"icon": "asset/logo.png",
+	"publisher": "shenjiaolong",
+	"author": "shenjiaolong",
+	"homepage": "http://vue-helper.80fight.cn/",
+	"license": "MIT",
+	"main": "dist/client",
+	"directories": {
+		"lib": "lib",
+		"test": "__tests__"
+	},
+	"publishConfig": {
+		"registry": "https://registry.npm.taobao.org/"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jiaolong1021/vue-helper.git"
+	},
+	"gitHead": "b1cc40df44b9cd73ba96d8b7f0369cc3ce690c45",
+	"scripts": {
+		"dev": "concurrently \"npm:dev-tsc\" \"npm:dev-build\"",
+		"dev-tsc": "tsc -b tsconfig.build.json -w",
+		"dev-build": "node scripts/build -- watch",
+		"build": "node scripts/build -- minify",
+		"release": "npm run build && npm run publish",
+		"publish": "vsce publish",
+		"test": "echo \"Error: run tests from root\" && exit 1"
+	},
+	"engines": {
+		"vscode": "^1.74.0"
+	},
+	"categories": [
+		"Snippets",
+		"Other"
+	],
+	"activationEvents": [
+		"onStartupFinished",
+		"onLanguage:vue"
+	],
+	"contributes": {
+		"commands": [
+			{
+				"command": "vue-helper.login",
+				"title": "vue-helper login"
+			},
+			{
+				"command": "vue-helper.openPay",
+				"title": "vue-helper openPay"
+			},
+			{
+				"command": "vue-helper.openDocument",
+				"title": "vue-helper openDocument"
+			},
+			{
+				"command": "vue-helper.feedback",
+				"title": "vue-helper feedback"
+			},
+			{
+				"command": "vue-helper.project.new",
+				"title": "vue-helper newProject"
+			},
+			{
+				"command": "vue-helper.form",
+				"title": "生成表单"
+			},
+			{
+				"command": "vue-helper.upload.block",
+				"title": "上传代码块"
+			},
+			{
+				"command": "vue-helper.add.component",
+				"title": "添加组件"
+			},
+			{
+				"command": "vue-helper.add.page",
+				"title": "添加页面"
+			},
+			{
+				"command": "vue-helper.add.file",
+				"title": "添加文件"
+			},
+			{
+				"command": "vue-helper.upload.component",
+				"title": "上传组件"
+			}
+		],
+		"views": {},
+		"menus": {
+			"editor/context": [
+				{
+					"command": "vue-helper.form",
+					"when": "!inOutput && vue-helper.pro",
+					"group": "navigation"
+				},
+				{
+					"command": "vue-helper.upload.block",
+					"when": "!inOutput && vue-helper.pro",
+					"group": "navigation"
+				}
+			],
+			"explorer/context": [
+				{
+					"command": "vue-helper.add.component",
+					"group": "0_vue-helper",
+					"when": "vue-helper.pro"
+				},
+				{
+					"command": "vue-helper.add.page",
+					"group": "0_vue-helper",
+					"when": "explorerResourceIsFolder && vue-helper.pro"
+				},
+				{
+					"command": "vue-helper.add.file",
+					"group": "0_vue-helper",
+					"when": "!explorerResourceIsFolder && vue-helper.self"
+				},
+				{
+					"command": "vue-helper.upload.component",
+					"group": "1_vue-helper",
+					"when": "vue-helper.pro"
+				}
+			]
+		},
+		"keybindings": [
+			{
+				"key": "alt+x",
+				"command": "vue-helper.blockSelect",
+				"when": "editorTextFocus"
+			},
+			{
+				"key": "alt+enter",
+				"command": "vue-helper.funcEnhance",
+				"when": "editorTextFocus"
+			},
+			{
+				"key": "backspace",
+				"command": "vue-helper.backspace",
+				"when": "vue-helper.backspace && textInputFocus && editorLangId =~ /^vue$|^typescript$|^javascript$|^html$|^json$|^css$|^scss$/"
+			},
+			{
+				"key": "alt+f",
+				"command": "vue-helper.chooseFramework"
+			},
+			{
+				"key": "alt+i",
+				"command": "vue-helper.apiInput"
+			},
+			{
+				"key": "alt+v",
+				"command": "vue-helper.git.visit"
+			}
+		],
+		"configuration": {
+			"title": "vue-helper",
+			"properties": {
+				"vue-helper.use-vue-Snippets": {
+					"type": "string",
+					"default": "nihao"
+				},
+				"vue-helper.user": {
+					"type": "string",
+					"default": ""
+				},
+				"vue-helper.version": {
+					"type": "string",
+					"default": ""
+				},
+				"vue-helper.hub": {
+					"type": "string",
+					"default": ""
+				},
+				"vue-helper.component-dir": {
+					"type": "string",
+					"default": ""
+				},
+				"vue-helper.framework": {
+					"type": "string",
+					"default": ""
+				},
+				"vue-helper.show-new-after-upgrade": {
+					"type": "boolean",
+					"default": true
+				}
+			}
+		}
+	},
+	"devDependencies": {
+		"@types/lodash": "^4.17.14",
+		"@types/node": "^20.12.2",
+		"@types/uuid": "^9.0.0",
+		"@types/vscode": "^1.74.0",
+		"axios": "^1.7.9",
+		"beautify": "^0.0.8",
+		"camelcase": "^8.0.0",
+		"concurrently": "^9.1.0",
+		"esbuild": "^0.24.0",
+		"jsonwebtoken": "^9.0.2",
+		"lodash": "^4.17.21",
+		"open": "^10.1.0",
+		"opn": "^6.0.0",
+		"vsce": "latest"
+	},
+	"dependencies": {
+		"glob": "^11.0.0"
+	},
+	"__metadata": {
+		"installedTimestamp": 1761917371333,
+		"targetPlatform": "undefined",
+		"size": 8819368
+	}
+}

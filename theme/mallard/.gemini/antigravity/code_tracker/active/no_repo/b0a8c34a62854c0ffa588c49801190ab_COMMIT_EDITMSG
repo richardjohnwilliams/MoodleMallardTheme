@@ -1,0 +1,171 @@
+ÞU
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#	new file:   Week 1 Content.txt
+#	new file:   Week 1/1.1.1_Chapter_1_Introduction_and_Defining_EDI.html
+#	new file:   Week 1/1.1.1_Chapter_2_UK_Legal_Framework_Equality_Act_2010.html
+#	new file:   Week 1/1.1.1_Chapter_3_Protected_Characteristics.html
+#	new file:   Week 1/1.1.1_Chapter_4_Public_Sector_Equality_Duty.html
+#	new file:   Week 1/1.1.1_Chapter_5_Gender_Pay_Gap_Reporting.html
+#	new file:   Week 1/1.1.1_Chapter_6_Revision_of_Learning_and_Key_Milestones.html
+#	new file:   Week 1/1.1.2_Understanding_Intersectionality.html
+#	new file:   Week 1/1.1.3_Case_Study_Analysis_Riverside_University.html
+#	new file:   Week 1/1.2.1_Chapter_1_Systemic_Barriers_and_Under_representation_in_STEM.html
+#	new file:   Week 1/1.2.1_Chapter_2_Bias_Gatekeeping_and_Knowledge_Gaps.html
+#	new file:   Week 1/1.2.1_Chapter_3_Table_of_Examples_of_Systemic_Barriers.html
+#	new file:   Week 1/1.2.1_Chapter_4_Promoting_Inclusive_Excellence.html
+#	new file:   Week 1/1.2.1_Chapter_5_Summary_of_Key_Concepts.html
+#	new file:   Week 1/1.2.2_Institutional_EDI_Strategy_Analysis.html
+#	new file:   Week 1/1.2.3_Designing_Inclusive_Research_Proposals_Forum.html
+#	new file:   Week 1/1.2.4_Designing_Inclusive_Research_Proposals_Database.html
+#	new file:   Week 1/1.3.1_Chapter_1_Representation_and_Participation_of_Marginalised_Groups.html
+#	new file:   Week 1/1.3.1_Chapter_2_Impact_of_Policy_on_Equality.html
+#	new file:   Week 1/1.3.1_Chapter_3_Advancing_Equality_through_Policy.html
+#	new file:   Week 1/1.3.2_PSED_Effectiveness.html
+#	new file:   Week 1/1.3.3_Developing_Recommendations_for_Political_Parties.html
+#	new file:   Week 2 content.txt
+#	new file:   Week 2/2.0.1_Introduction.html
+#	new file:   Week 2/2.1.2_Mapping_Positionality.html
+#	new file:   Week 2/2.1.3_Group_Forum_Debating_WPP.html
+#	new file:   Week 2/2.1.4_Group_Submission_Revised_WPP.html
+#	new file:   Week 2/2.2.1_Chapter_1_Introduction_EDI_Models.html
+#	new file:   Week 2/2.2.1_Chapter_2_Deficit_Model.html
+#	new file:   Week 2/2.2.1_Chapter_3_Structural_Model.html
+#	new file:   Week 2/2.2.1_Chapter_4_Socio_psychological_Model.html
+#	new file:   Week 2/2.2.1_Chapter_5_Comparative_Analysis.html
+#	new file:   Week 2/2.2.2_Applying_Models.html
+#	new file:   Week 2/2.2.3_Primary_Intervention_Design.html
+#	new file:   Week 2/2.2.4_Interconnectedness_EDI_Models.html
+#	new file:   Week 2/2.3.1_Chapter_1_Defining_Critical_EDI.html
+#	new file:   Week 2/2.3.1_Chapter_2_Reflective_vs_Reflexive.html
+#	new file:   Week 2/2.3.1_Chapter_3_Reflexivity_Challenging_Power.html
+#	new file:   Week 2/2.3.1_Chapter_4_Actionable_Strategies.html
+#	new file:   Week 2/2.3.1_Chapter_5_Synthesis.html
+#	new file:   Week 2/2.3.2_Reflexivity_Journal.html
+#	new file:   Week 2/2.3.3_Responding_EDI_Challenges.html
+#	new file:   Week 2/2.3.4_EDI_Challenge_Submission.html
+#	new file:   Week 2/2.3.5_Critical_EDI_Action_Plan.html
+#	new file:   Week 2/2.4.1_Conclusion.html
+#	new file:   Week 3 content.txt
+#	new file:   Week 3/3.1.1_Neurodiversity_Beyond_the_Deficit_Model.html
+#	new file:   Week 3/3.1.2_Chapter_1_Why_Models_of_Disability_Matter.html
+#	new file:   Week 3/3.1.2_Chapter_2_The_Medical_Model.html
+#	new file:   Week 3/3.1.2_Chapter_3_The_Social_Model.html
+#	new file:   Week 3/3.1.2_Chapter_4_The_Affirmative_Model.html
+#	new file:   Week 3/3.1.2_Chapter_5_The_Neurodiversity_Paradigm.html
+#	new file:   Week 3/3.1.3_Debating_the_Models_of_Disability.html
+#	new file:   Week 3/3.1.4_Executive_Functioning_Systemic_Design_and_Strategy.html
+#	new file:   Week 3/3.2.1_Chapter_1_Introduction_to_Inclusive_Design.html
+#	new file:   Week 3/3.2.1_Chapter_2_Designing_Right_First_Time.html
+#	new file:   Week 3/3.2.1_Chapter_3_Grimaldi_et_al_2024.html
+#	new file:   Week 3/3.2.1_Chapter_4_Actions_in_Practice.html
+#	new file:   Week 3/3.2.1_Chapter_5_Standards_Codes_and_Supply_Chains.html
+#	new file:   Week 3/3.2.1_Chapter_6_How_the_Framework_Complements_the_Toolkit.html
+#	new file:   Week 3/3.2.1_Chapter_7_The_Royal_Academy_of_Engineerings_EDI_Engine.html
+#	new file:   Week 3/3.2.2_Inaccessible_Design.html
+#	new file:   Week 3/3.2.3_Universal_Design_for_Learning.html
+#	new file:   Week 3/3.3.1_Chapter_1_Divergent_Thinking_and_Innovation.html
+#	new file:   Week 3/3.3.1_Chapter_1_Framing_and_strengths_based_lens.html
+#	new file:   Week 3/3.3.1_Chapter_2_Strengths_in_Practice.html
+#	new file:   Week 3/3.3.1_Chapter_3_Evidence_for_Creativity_and_Innovation.html
+#	new file:   Week 3/3.3.1_Chapter_4_Inclusion_as_a_Strategic_Engine.html
+#	new file:   Week 3/3.3.1_Chapter_5_Workplace_Inclusion_and_Wellbeing.html
+#	new file:   Week 3/3.3.2_Strengths_Based_Case_Study_Analysis.html
+#	new file:   Week 3/3.3.3_Group_Forum_Designing_an_Inclusive_Workplace_Initiative.html
+#	new file:   Week 3/3.3.3_Group_Forum_Inclusive_Workplace.html
+#	new file:   Week 3/3.3.4_Submitting_Neuroinclusive_Workplace_Initiative.html
+#	new file:   Week 3/3.3.4_Submitting_a_Neuroinclusive_Workplace_Initiative.html
+#	new file:   Week 3/3.4.1_From_Equality_to_Equity.html
+#	new file:   Week 3/3.4.1_From_Equality_to_Equity_Rethinking_Systemic_Inclusion.html
+#	new file:   Week 3/3.4.2_Policy_Analysis_Gaps_and_Opportunities.html
+#	new file:   Week 3/3.4.2_Policy_Analysis_Gaps_and_Opportunities_for_Neuroinclusion.html
+#	new file:   Week 3/3.4.3_Advocacy_Strategy_Development.html
+#	new file:   Week 3/3.5.1_Conclusions_and_Recommendations.html
+#	new file:   Week 4 Content.txt
+#	new file:   Week 4/4.1.1_Chapter_1_Defining_Race_and_Racial_Equality.html
+#	new file:   Week 4/4.1.1_Chapter_2_The_Spectrum_of_Racism.html
+#	new file:   Week 4/4.1.1_Chapter_3_Systemic_and_Structural_Racism.html
+#	new file:   Week 4/4.1.1_Chapter_4_Engineering_and_Social_Justice_Lenses.html
+#	new file:   Week 4/4.1.1_Chapter_5_Interconnected_Disadvantages_and_Systemic_Feedback.html
+#	new file:   Week 4/4.1.2_Positionality_and_Perception.html
+#	new file:   Week 4/4.2.1_Chapter_1_Science_as_an_Instrument_of_Empire.html
+#	new file:   Week 4/4.2.1_Chapter_2_Infrastructure_Science_Supporting_Colonialism.html
+#	new file:   Week 4/4.2.1_Chapter_3_Scientific_Racism_and_Civilising_Mission.html
+#	new file:   Week 4/4.2.1_Chapter_4_Eurocentric_Bias_and_Indigenous_Knowledge.html
+#	new file:   Week 4/4.2.1_Chapter_5_Colonial_Legacies_and_Design_Bias.html
+#	new file:   Week 4/4.2.2_Juxtaposing_Images_and_Critical_Inquiry.html
+#	new file:   Week 4/4.3.1_Chapter_1_Educational_Pipeline_and_Workplace_Barriers.html
+#	new file:   Week 4/4.3.1_Chapter_2_Design_Bias_and_Human_Centered_Design.html
+#	new file:   Week 4/4.3.1_Chapter_3_Geopolitics_Resource_Extraction_and_Equity.html
+#	new file:   Week 4/4.3.2_Redesigning_for_Equity_HCD.html
+#	new file:   Week 4/4.3.3_Submitting_a_Redesign_for_Equity.html
+#	new file:   Week 4/4.4.1_Chapter_1_AI_Bias_Overview.html
+#	new file:   Week 4/4.4.1_Chapter_2_Environmental_Racism.html
+#	new file:   Week 4/4.4.1_Chapter_3_Systemic_Racism_and_Health_Inequity.html
+#	new file:   Week 4/4.4.2_Deconstructing_Bias_and_Proposing_Interventions.html
+#	new file:   Week 4/4.5.1_Chapter_1_Critical_Race_Theory_as_a_Framework.html
+#	new file:   Week 4/4.5.1_Chapter_2_Decolonising_Science_and_STEM_Curricula.html
+#	new file:   Week 4/4.5.1_Chapter_3_Principles_and_Practices.html
+#	new file:   Week 4/4.5.2_Equity_Action_Memo.html
+#	new file:   Week 4/4.6.1_Week_4_Conclusions.html
+#	new file:   Week 5 content follows.txt
+#	new file:   Week 5/5.1.1_Chapter_1_Foundations_of_Gender_Equality.html
+#	new file:   Week 5/5.1.1_Chapter_2_The_Leaky_Pipeline.html
+#	new file:   Week 5/5.1.1_Chapter_3_Barriers_to_Entry_and_Progression.html
+#	new file:   Week 5/5.1.1_Chapter_4_Retention_Challenges_and_Workplace_Culture.html
+#	new file:   Week 5/5.1.1_Chapter_5_Intersectionality_in_STEM.html
+#	new file:   Week 5/5.1.2_Evidencing_the_Leaky_Pipeline.html
+#	new file:   Week 5/5.1.3_Revealing_the_Hidden_Curriculum.html
+#	new file:   Week 5/5.2.1_Chapter_1_Historical_Context_and_Representation.html
+#	new file:   Week 5/5.2.1_Chapter_2_Prominent_Figures_and_Their_Impact.html
+#	new file:   Week 5/5.2.1_Chapter_3_Policy_and_Legislative_Frameworks.html
+#	new file:   Week 5/5.2.2_Analysing_Impact_and_Effectiveness_of_Prominent_Women_in_STEM.html
+#	new file:   Week 5/5.2.3_Policy_Proposal_Workshop.html
+#	new file:   Week 5/5.3.1_Chapter_1_Educational_Interventions_and_Outreach.html
+#	new file:   Week 5/5.3.1_Chapter_2_Inclusive_Workplaces_and_Retention.html
+#	new file:   Week 5/5.3.1_Chapter_3_Government_Policy_and_Systemic_Levers.html
+#	new file:   Week 5/5.3.1_Chapter_4_Advocacy_Allyship_and_Visibility.html
+#	new file:   Week 5/5.3.2_Hidden_Curriculum_Module_Design.html
+#	new file:   Week 5/5.3.3_Bias_Audit_of_a_Job_Description.html
+#	new file:   Week 5/5.3.4_Comparative_Policy_Analysis.html
+#	new file:   Week 5/5.4.1_The_Continued_Pursuit_of_Gender_Equality_in_STEM_and_Politics.html
+#	new file:   Week 5/5.4.2_Online_Encyclopaedia_Entry_Award_Nomination.html
+#	new file:   Week 5/5.5.1_Week_5_Conclusions.html
+#	new file:   Week 7 Widening Participation & Out.txt
+#	new file:   Week 7/7.1.1_Widening_Participation_Outreach_and_Public_Engagement.html
+#	new file:   Week 7/7.1.2_The_Multi_faceted_Imperative_for_EDI.html
+#	new file:   Week 7/7.1.3_Understanding_Access_and_Participation_Plans_APPs.html
+#	new file:   Week 7/7.2.1_Chapter_1_Foundations_of_Socioeconomic_Disparity.html
+#	new file:   Week 7/7.2.1_Chapter_2_The_University_Success_Triangle.html
+#	new file:   Week 7/7.2.1_Chapter_3_The_Role_of_Schools_and_Teachers.html
+#	new file:   Week 7/7.2.1_Chapter_4_The_Impact_of_Teacher_Shortages.html
+#	new file:   Week 7/7.2.1_Chapter_5_Barriers_to_Participation.html
+#	new file:   Week 7/7.2.1_Chapter_6_The_Hidden_Curriculum.html
+#	new file:   Week 7/7.2.2_Analysing_Socioeconomic_Disparities.html
+#	new file:   Week 7/7.2.3_Chapter_1_Gender_and_Ethnic_Underrepresentation.html
+#	new file:   Week 7/7.2.3_Chapter_2_Gender_Disparities_in_STEM.html
+#	new file:   Week 7/7.2.3_Chapter_3_Ethnic_Disparities_in_STEM.html
+#	new file:   Week 7/7.2.3_Chapter_4_Stereotype_Threat_and_Identity.html
+#	new file:   Week 7/7.2.3_Chapter_5_Implicit_Bias.html
+#	new file:   Week 7/7.3.1_Pre_University_Pathways.html
+#	new file:   Week 7/7.3.2_Retention_Progression_and_Belonging_in_Higher_Education.html
+#	new file:   Week 7/7.3.3_Systemic_Bias_and_Inclusive_Research_Cultures.html
+#	new file:   Week 7/7.3.4_Widening_Participation_and_Outreach_Strategy_Brief.html
+#	new file:   Week 7/7.4.1_Conclusion_and_Future_Directions.html
+#	new file:   Week 9 content.txt
+#	new file:   find_headers.py
+#	new file:   find_week9_headers.py
+#	new file:   process_week_1.py
+#	new file:   process_week_2.py
+#	new file:   process_week_3.py
+#	new file:   process_week_4.py
+#	new file:   process_week_5.py
+#	new file:   process_week_7.py
+#
+ÞU2Bfile:///c:/Users/ucqnrwi/AntiGemini/Moodle/EDI/.git/COMMIT_EDITMSG

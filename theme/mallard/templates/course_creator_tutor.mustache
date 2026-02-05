@@ -1,0 +1,29 @@
+{{#tutor}}
+<section class="mt-4 mallard-course-tutor">
+  <h3 class="h5 mb-3">{{#str}}meetcoursetutor, theme_mallard{{/str}}<br><br></h3>
+
+  <div class="d-flex align-items-start">
+    <div class="mr-3" style="margin-right: 15px;">
+      {{{ picture }}}
+    </div>
+
+    <div class="flex-grow-1">
+      <div class="mb-2" style="font-size: 14pt; font-weight:bold;">
+        <a class="mallard-tutor-name" href="{{profileurl}}">
+          {{fullname}}
+        </a>
+      </div>
+
+      {{#bio}}
+        <div class="mb-2">{{{ bio }}}</div>
+      {{/bio}}
+
+      {{#editprofileurl}}
+        <a class="btn btn-sm btn-outline-primary" href="{{editprofileurl}}">
+          {{#str}}editprofile, theme_mallard{{/str}}
+        </a>
+      {{/editprofileurl}}
+    </div>
+  </div>
+</section>
+{{/tutor}}
