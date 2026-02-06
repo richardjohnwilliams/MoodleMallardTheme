@@ -15,8 +15,6 @@ class core_renderer extends \theme_boost\output\core_renderer {
     /**
      * Append the tutor block after the normal course content footer.
      *
-     * IMPORTANT: Signature must match core_renderer::course_content_footer($onlyifnotcalledbefore = false)
-     *
      * @param bool $onlyifnotcalledbefore
      * @return string
      */
@@ -129,7 +127,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
                 $tablistnav
             );
 
-            // Return the inner HTML (your mustache already wraps with .secondary-navigation).
+            // Return the inner HTML.
             return $this->render($moremenu);
         }
 

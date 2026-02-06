@@ -7,50 +7,58 @@ defined('MOODLE_INTERNAL') || die();
 // Moodle 4.5+ may provide \core_filters\text_filter.
 // Older versions use \moodle_text_filter.
 if (class_exists('\\core_filters\\text_filter')) {
-    abstract class base_text_filter extends \core_filters\text_filter {}
+    abstract class base_text_filter extends \core_filters\text_filter
+    {
+    }
 } else {
-    abstract class base_text_filter extends \moodle_text_filter {}
+    abstract class base_text_filter extends \moodle_text_filter
+    {
+    }
 }
 
-class text_filter extends base_text_filter {
+class text_filter extends base_text_filter
+{
 
-public function filter($text, array $options = []) {
-    if (!is_string($text) || $text === '') {
-        return $text;
+    public function filter($text, array $options = [])
+    {
+        if (!is_string($text) || $text === '') {
+            return $text;
+        }
+
+        // Only on Page activity view.
+        if (!$this->is_page_module_context($options)) {
+            return $text;
+        }
+
+        // Prevent double-processing if something already transformed it.
+        if (stripos($text, 'mallard-accordion__ui') !== false || stripos($text, 'mallard-accordion--rendered') !== false) {
+            return $text;
+        }
+
+        return $this->transform_wrappers($text);
     }
 
-    // Only on Page activity view.
-    if (!$this->is_page_module_context($options)) {
-        return $text;
+    private function is_page_module_context(array $options): bool
+    {
+        global $PAGE;
+
+        // Most reliable and earliest available.
+        $script = $_SERVER['SCRIPT_NAME'] ?? '';
+        if ($script === '/mod/page/view.php') {
+            return true;
+        }
+
+        // Fallback: Moodle pagetype often looks like "mod-page-view".
+        $pagetype = $PAGE->pagetype ?? '';
+        if (is_string($pagetype) && strpos($pagetype, 'mod-page-') === 0) {
+            return true;
+        }
+
+        return false;
     }
 
-    // Prevent double-processing if something already transformed it.
-    if (stripos($text, 'mallard-accordion__ui') !== false || stripos($text, 'mallard-accordion--rendered') !== false) {
-        return $text;
-    }
-
-    return $this->transform_wrappers($text);
-}
-
-private function is_page_module_context(array $options): bool {
-    global $PAGE;
-
-    // Most reliable and earliest available.
-    $script = $_SERVER['SCRIPT_NAME'] ?? '';
-    if ($script === '/mod/page/view.php') {
-        return true;
-    }
-
-    // Fallback: Moodle pagetype often looks like "mod-page-view".
-    $pagetype = $PAGE->pagetype ?? '';
-    if (is_string($pagetype) && strpos($pagetype, 'mod-page-') === 0) {
-        return true;
-    }
-
-    return false;
-}
-
-    private function transform_wrappers(string $html): string {
+    private function transform_wrappers(string $html): string
+    {
         $doc = new \DOMDocument('1.0', 'UTF-8');
         $old = libxml_use_internal_errors(true);
 
@@ -84,37 +92,37 @@ private function is_page_module_context(array $options): bool {
         );
 
         if (!$nodes || $nodes->length === 0) {
-    // AUTO MODE: if there is no explicit wrapper, treat the whole content as one accordion,
-    // but only if it looks like an accordion (2+ headings).
-    $headingcount = 0;
-    foreach ($root->childNodes as $child) {
-        if ($child instanceof \DOMElement) {
-            $tag = strtolower($child->tagName);
-            if (in_array($tag, ['h2', 'h3', 'h4', 'h5', 'h6'], true)) {
-                $headingcount++;
+            // AUTO MODE: if there is no explicit wrapper, treat the whole content as one accordion,
+            // but only if it looks like an accordion (2+ headings).
+            $headingcount = 0;
+            foreach ($root->childNodes as $child) {
+                if ($child instanceof \DOMElement) {
+                    $tag = strtolower($child->tagName);
+                    if (in_array($tag, ['h2', 'h3', 'h4', 'h5', 'h6'], true)) {
+                        $headingcount++;
+                    }
+                }
             }
+
+            // If the page does not have at least two headings, do nothing.
+            if ($headingcount < 2) {
+                return $html;
+            }
+
+            // Wrap all existing root content in a mallard-accordion container.
+            $auto = $doc->createElement('div');
+            $auto->setAttribute('class', 'mallard-accordion mallard-accordion--auto');
+
+            while ($root->firstChild) {
+                $auto->appendChild($root->firstChild);
+            }
+            $root->appendChild($auto);
+
+            // Transform the new wrapper.
+            $this->transform_single_wrapper($doc, $auto);
+
+            return $this->inner_html($root);
         }
-    }
-
-    // If the page does not have at least two headings, do nothing.
-    if ($headingcount < 2) {
-        return $html;
-    }
-
-    // Wrap all existing root content in a mallard-accordion container.
-    $auto = $doc->createElement('div');
-    $auto->setAttribute('class', 'mallard-accordion mallard-accordion--auto');
-
-    while ($root->firstChild) {
-        $auto->appendChild($root->firstChild);
-    }
-    $root->appendChild($auto);
-
-    // Transform the new wrapper.
-    $this->transform_single_wrapper($doc, $auto);
-
-    return $this->inner_html($root);
-}
         $wrappers = [];
         foreach ($nodes as $n) {
             if ($n instanceof \DOMElement) {
@@ -129,7 +137,8 @@ private function is_page_module_context(array $options): bool {
         return $this->inner_html($root);
     }
 
-    private function transform_single_wrapper(\DOMDocument $doc, \DOMElement $wrapper): void {
+    private function transform_single_wrapper(\DOMDocument $doc, \DOMElement $wrapper): void
+    {
         $children = [];
         foreach ($wrapper->childNodes as $child) {
             $children[] = $child;
@@ -191,7 +200,7 @@ private function is_page_module_context(array $options): bool {
             $wrapper->removeChild($wrapper->firstChild);
         }
 
-        $existing = trim((string)$wrapper->getAttribute('class'));
+        $existing = trim((string) $wrapper->getAttribute('class'));
         if (strpos(' ' . $existing . ' ', ' mallard-accordion--rendered ') === false) {
             $wrapper->setAttribute('class', trim($existing . ' mallard-accordion--rendered'));
         }
@@ -255,9 +264,27 @@ private function is_page_module_context(array $options): bool {
             $body = $doc->createElement('div');
             $body->setAttribute('class', 'card-body');
 
+            // Two-column layout: text (col-md-8) + images (col-md-4).
+            $row = $doc->createElement('div');
+            $row->setAttribute('class', 'row');
+
+            $coltext = $doc->createElement('div');
+            $coltext->setAttribute('class', 'col-md-8');
+
+            $colmedia = $doc->createElement('div');
+            $colmedia->setAttribute('class', 'col-md-4');
+
             foreach ($panel['nodes'] as $n) {
-                $body->appendChild($n);
+                $coltext->appendChild($n);
             }
+
+            // Move block-style images (and image-only wrappers) into the right column.
+            $this->move_images_to_media_column($doc, $coltext, $colmedia);
+
+            // Always append both columns (empty media column if no images).
+            $row->appendChild($coltext);
+            $row->appendChild($colmedia);
+            $body->appendChild($row);
 
             $collapse->appendChild($body);
             $card->appendChild($header);
@@ -268,19 +295,133 @@ private function is_page_module_context(array $options): bool {
         $wrapper->appendChild($accordion);
     }
 
-    private function short_id(): string {
+    private function short_id(): string
+    {
         try {
             return bin2hex(random_bytes(4));
         } catch (\Throwable $e) {
-            return substr(md5((string)microtime(true)), 0, 8);
+            return substr(md5((string) microtime(true)), 0, 8);
         }
     }
 
-    private function inner_html(\DOMElement $el): string {
+    private function inner_html(\DOMElement $el): string
+    {
         $out = '';
         foreach ($el->childNodes as $child) {
             $out .= $el->ownerDocument->saveHTML($child);
         }
         return $out;
+    }
+
+    private function move_images_to_media_column(\DOMDocument $doc, \DOMElement $coltext, \DOMElement $colmedia): void
+    {
+        // Collect images first (DOMNodeList is live).
+        $imgs = $coltext->getElementsByTagName('img');
+        $tomove = [];
+        foreach ($imgs as $img) {
+            if ($img instanceof \DOMElement) {
+                $tomove[] = $img;
+            }
+        }
+
+        foreach ($tomove as $img) {
+            $parent = $img->parentNode;
+
+            // If the image is inside a link, treat the link as the "image node".
+            if ($parent instanceof \DOMElement && strtolower($parent->tagName) === 'a') {
+                $candidate = $parent;
+            } else {
+                $candidate = $img;
+            }
+
+            // Prefer moving a whole block wrapper if it only contains the image(s).
+            $block = null;
+
+            if ($candidate->parentNode instanceof \DOMElement) {
+                $p = $candidate->parentNode;
+                $tag = strtolower($p->tagName);
+
+                if ($tag === 'figure') {
+                    $block = $p; // keep figcaption with the image
+                } else if ($tag === 'p' && $this->element_contains_only_images($p)) {
+                    $block = $p;
+                } else if ($tag === 'div' && $this->element_contains_only_images($p)) {
+                    $block = $p;
+                }
+            }
+
+            if ($block instanceof \DOMElement) {
+                $this->ensure_img_fluid($block);
+                $colmedia->appendChild($block);
+            } else if ($candidate instanceof \DOMElement) {
+                // Only move the image/link if it is not embedded in mixed text.
+                // If it is embedded, leave it where it is to avoid breaking paragraphs.
+                if ($candidate->parentNode instanceof \DOMElement && $this->element_contains_only_images($candidate->parentNode)) {
+                    $this->ensure_img_fluid($candidate);
+                    $colmedia->appendChild($candidate->parentNode);
+                }
+            }
+        }
+
+        // Clean up empty <p> left behind.
+        $ps = $coltext->getElementsByTagName('p');
+        $ptoclean = [];
+        foreach ($ps as $p) {
+            if ($p instanceof \DOMElement) {
+                $ptoclean[] = $p;
+            }
+        }
+        foreach ($ptoclean as $p) {
+            $hasimg = $p->getElementsByTagName('img')->length > 0;
+            if (!$hasimg && trim((string) $p->textContent) === '') {
+                if ($p->parentNode) {
+                    $p->parentNode->removeChild($p);
+                }
+            }
+        }
+    }
+
+    private function element_contains_only_images(\DOMElement $el): bool
+    {
+        foreach ($el->childNodes as $child) {
+            if ($child instanceof \DOMText) {
+                if (trim($child->wholeText) !== '') {
+                    return false;
+                }
+                continue;
+            }
+
+            if ($child instanceof \DOMElement) {
+                $tag = strtolower($child->tagName);
+
+                if ($tag === 'img') {
+                    continue;
+                }
+
+                // Allow <a><img></a>
+                if ($tag === 'a' && $this->element_contains_only_images($child)) {
+                    continue;
+                }
+
+                // Anything else means mixed content.
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private function ensure_img_fluid(\DOMElement $node): void
+    {
+        // Add img-fluid to any images inside the node.
+        $imgs = $node->getElementsByTagName('img');
+        foreach ($imgs as $img) {
+            if (!$img instanceof \DOMElement) {
+                continue;
+            }
+            $class = trim((string) $img->getAttribute('class'));
+            if (strpos(' ' . $class . ' ', ' img-fluid ') === false) {
+                $img->setAttribute('class', trim($class . ' img-fluid'));
+            }
+        }
     }
 }

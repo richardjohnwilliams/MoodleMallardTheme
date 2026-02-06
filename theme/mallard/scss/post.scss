@@ -1564,3 +1564,97 @@ body.pagelayout-incourse #topofscroll.main-inner {
   opacity: 1 !important;
   height: auto;
 }
+
+/* =========================
+   Mallard: Filter accordion styling (Figma-like)
+   Targets: output from filter_mallardaccordion
+   ========================= */
+
+.no-overflow .mallard-accordion--rendered .mallard-accordion__ui {
+  margin: 16px 0 20px;
+  border: 1px solid #E6E6E6;
+  border-radius: 12px;
+  background-color: #FFFFFF;
+  overflow: hidden;
+}
+
+/* Remove default Bootstrap card look inside */
+.no-overflow .mallard-accordion--rendered .mallard-accordion__ui .card {
+  border: 0;
+  border-radius: 0;
+  margin: 0;
+  background: transparent;
+}
+
+.no-overflow .mallard-accordion--rendered .mallard-accordion__ui .card-header {
+  padding: 0;
+  border: 0;
+  background-color: #F8F8F8;
+  border-bottom: 1px solid #E6E6E6;
+}
+
+.no-overflow .mallard-accordion--rendered .mallard-accordion__ui .card-header .h6 {
+  margin: 0;
+}
+
+/* Make the header look like the Figma row */
+.no-overflow .mallard-accordion--rendered .mallard-accordion__ui .mallard-accordion__toggle {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 16px 16px 16px 44px; /* room for chevron */
+  text-align: left;
+
+  font-weight: 600;
+  color: #005AD2;
+
+  border: 0;
+  background: transparent;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.no-overflow .mallard-accordion--rendered .mallard-accordion__ui .mallard-accordion__toggle:hover,
+.no-overflow .mallard-accordion--rendered .mallard-accordion__ui .mallard-accordion__toggle:focus {
+  background-color: #F2F2F2;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+/* Open state: white header row like the Figma open panel */
+.no-overflow .mallard-accordion--rendered .mallard-accordion__ui .mallard-accordion__toggle:not(.collapsed) {
+  background-color: #FFFFFF;
+}
+
+/* CSS chevron (no markup changes needed) */
+.no-overflow .mallard-accordion--rendered .mallard-accordion__ui .mallard-accordion__toggle::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-50%) rotate(45deg); /* closed: down */
+  transition: transform 150ms ease-in-out;
+}
+
+.no-overflow .mallard-accordion--rendered .mallard-accordion__ui .mallard-accordion__toggle:not(.collapsed)::before {
+  transform: translateY(-50%) rotate(-135deg); /* open: up */
+}
+
+/* Body spacing like the Figma component */
+.no-overflow .mallard-accordion--rendered .mallard-accordion__ui .card-body {
+  padding: 16px;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #E6E6E6;
+}
+
+.no-overflow .mallard-accordion--rendered .mallard-accordion__ui .card:last-child .card-body {
+  border-bottom: 0;
+}
+
+.no-overflow .mallard-accordion--rendered .mallard-accordion__ui .card-body p:last-child {
+  margin-bottom: 0;
+}
