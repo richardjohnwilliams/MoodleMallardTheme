@@ -22,11 +22,12 @@
  */
 
 defined('MOODLE_INTERNAL') || die();
-
+echo $OUTPUT->doctype();
 global $CFG, $PAGE, $OUTPUT, $SITE, $USER;
 
 require_once($CFG->libdir . '/behat/lib.php');
 require_once($CFG->dirroot . '/course/lib.php');
+
 
 // Identify course view page so we can switch to a static right sidebar layout.
 $iscourseview = (
@@ -125,8 +126,8 @@ $primary = new core\navigation\output\primary($PAGE);
 $renderer = $PAGE->get_renderer('core');
 $primarymenu = $primary->export_for_template($renderer);
 
-// If the settings menu will be included in the header then do not add it here.
-$buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions() && !$hassecondarynavigation;
+// If core is not putting the settings menu into header actions, we must build it for the page.
+$buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions();
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
 
 // Activity header (guarded).

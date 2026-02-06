@@ -19,6 +19,9 @@
 
     Mallard drawers template (based on Boost drawers).
 }}
+
+{{{ output.doctype }}}
+<html {{{ output.htmlattributes }}}>
 {{> theme_boost/head }}
 
 <body {{{ bodyattributes }}}>
@@ -28,8 +31,13 @@
 
     {{{ output.standard_top_of_body_html }}}
 
-    {{! Mallard: removed Boost navbar partial (breadcrumbs row) }}
-{{> theme_boost/navbar }}
+    {{> theme_boost/navbar }}
+
+    {{! Ensure the page heading menu has a place to render even if the navbar template has been altered }}
+    <div class="d-none d-md-block">
+        {{{ output.page_heading_menu }}}
+    </div>
+
     {{#courseindex}}
         {{< theme_boost/drawer }}
             {{$id}}theme_boost-drawers-courseindex{{/id}}
@@ -113,14 +121,15 @@
 
             {{{ output.full_header }}}
 
-           <div class="secondary-navigation d-print-none">{{{ output.secondary_navigation }}}</div>
+            <div class="secondary-navigation d-print-none">{{{ output.secondary_navigation }}}</div>
 
             <div id="page-content" class="pb-3 d-print-block">
                 <div id="region-main-box">
 
+                    {{! Legacy region main settings menu block (keep, but do not rely on it alone) }}
                     {{#hasregionmainsettingsmenu}}
                         <div id="region-main-settings-menu" class="d-print-none">
-                            <div> {{{ regionmainsettingsmenu }}} </div>
+                            <div>{{{ regionmainsettingsmenu }}}</div>
                         </div>
                     {{/hasregionmainsettingsmenu}}
 
@@ -130,6 +139,7 @@
 
                             <div id="region-main" class="mallard-course-main">
 
+                                {{! Critical: proxy used by JS to mount activity/course settings/actions }}
                                 {{#hasregionmainsettingsmenu}}
                                     <div class="region_main_settings_menu_proxy"></div>
                                 {{/hasregionmainsettingsmenu}}
@@ -193,6 +203,8 @@
                     {{^iscourseview}}
 
                         <div id="region-main">
+
+                            {{! Critical: proxy used by JS to mount activity/course settings/actions }}
                             {{#hasregionmainsettingsmenu}}
                                 <div class="region_main_settings_menu_proxy"></div>
                             {{/hasregionmainsettingsmenu}}
