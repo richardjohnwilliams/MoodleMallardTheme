@@ -1558,3 +1558,9 @@ body.pagelayout-incourse #topofscroll.main-inner {
   display: flex;
   flex-direction: column;
 }
+
+/* Ensure secondary navigation is visible */
+.secondary-navigation .moremenu {
+  opacity: 1 !important;
+  height: auto;
+}
